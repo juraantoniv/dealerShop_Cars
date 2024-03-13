@@ -1,0 +1,19 @@
+.icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    width: 60%;
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vh;
+    cursor: pointer;
+}
+
+svg:hover{
+    color: red;
+}
