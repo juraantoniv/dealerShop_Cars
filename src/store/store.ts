@@ -31,4 +31,5 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export const selectCars = (state: AppRootStateType) => state.cars.data;
 export const selectUser = (state: AppRootStateType) => state.cars.user;
+export const selectCount = (state: AppRootStateType) => state.cars.count;
 // export const selectBuy = (state: AppRootStateType) => state.users.buyItems;

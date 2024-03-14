@@ -6,7 +6,7 @@ export type ITokensForRefresh = {
 export type GoodsType = {
   page: number;
   limit: number;
-  itemsFound: number;
+  total: number;
   data: DataCars[];
 };
 
@@ -18,7 +18,7 @@ export type DataCars = {
   image?: string;
   views?: [];
   likes?: [];
-  currency?: [];
+  currency: [];
   createdAt: string;
   updatedAt: string;
   boughtBy?: string;
@@ -28,7 +28,8 @@ export type ParamsType = {
   page?: string;
   limit?: string;
   price?: number;
-  searchName?: string;
+  search?: string;
+  offset?: string;
 };
 
 export type ITokensPair = {

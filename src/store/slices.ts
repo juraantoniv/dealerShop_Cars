@@ -9,10 +9,10 @@ import { AppDispatch, AppRootStateType } from "./store";
 const initialState = {
   data: {} as GoodsType,
   user: {},
-  // id: "",
-  // buyItems: [] as GoodsType[] | [],
-  // page: 1,
-  // count: 5,
+  id: "",
+  buyItems: [] as GoodsType[] | [],
+  page: 1,
+  count: 5,
 };
 
 const slice = createSlice({
@@ -21,6 +21,9 @@ const slice = createSlice({
   reducers: {
     setCurrenUser: (state, action) => {
       state.user = action.payload;
+    },
+    setCount: (state, action) => {
+      state.count = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -40,7 +43,7 @@ const slice = createSlice({
 });
 
 const fetchGoods = createAppAsyncThunk<GoodsType, ParamsType | void>(
-  "users/fetchUsers",
+  "cars/fetchCars",
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI;
     return thunkTryCatch(thunkAPI, async () => {
@@ -51,10 +54,21 @@ const fetchGoods = createAppAsyncThunk<GoodsType, ParamsType | void>(
   },
 );
 
+const likeCar = createAppAsyncThunk<void, string>(
+  "cars/likeCar",
+  async (arg, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    return thunkTryCatch(thunkAPI, async () => {
+      await carsApiService.likeCar(arg);
+    });
+  },
+);
+
 export const userReducer = slice.reducer;
 export const userActions = slice.actions;
 export const userThunks = {
   fetchGoods,
+  likeCar,
 };
 
 export const thunkTryCatch = async (
@@ -70,6 +84,7 @@ export const thunkTryCatch = async (
   try {
     return await logic();
   } catch (e) {
+    console.log(e);
     return rejectWithValue(null);
   }
 };

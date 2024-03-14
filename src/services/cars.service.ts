@@ -7,7 +7,9 @@ export const carsApiService = {
       params: {
         page: params?.page,
         limit: params?.limit,
-        name: params?.searchName,
+        search: params?.search,
+        offset: params?.offset,
       },
     }),
+  likeCar: (id: string) => instance.post<void>(`cars/like/${id}`),
 };

@@ -7,10 +7,11 @@ import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { selectUser } from "../../store/store";
+import { userThunks } from "../../store/slices";
+import { selectUser, useAppDispatch } from "../../store/store";
 import { LoginFrom } from "../loginComponent/loginComponent";
 import s from "./headerComponent.module.css";
 
@@ -60,17 +61,37 @@ export default function SearchAppBar() {
   const user = useSelector(selectUser);
   const [show, setShow] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const open = Boolean(anchorEl);
+  const dispatch = useAppDispatch();
   const search = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
-    console.log(event.currentTarget.value);
+    setTitle(event.currentTarget.value);
   };
-
-  console.log(user);
 
   const showLoginForm = () => {
     setShow(!show);
+  };
+
+  const addItemHandler = () => {
+    if (title.trim() !== "") {
+      dispatch(userThunks.fetchGoods({ search: title }));
+      setTitle("");
+    } else {
+      setError("Title is required");
+      dispatch(userThunks.fetchGoods());
+    }
+  };
+
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (error !== null) {
+      setError(null);
+    }
+    if (e.charCode === 13) {
+      addItemHandler();
+    }
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -100,6 +121,9 @@ export default function SearchAppBar() {
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
                 onChange={search}
+                value={title}
+                error={!!error}
+                onKeyPress={onKeyPressHandler}
               />
             </Search>
           </Box>

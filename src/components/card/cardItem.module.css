@@ -9,4 +9,10 @@
 .cardActions{
     display: flex;
     justify-content: flex-start;
+    align-items: center;
+}
+
+.boxCurrency{
+    display: flex;
+    justify-content: space-between;
 }
