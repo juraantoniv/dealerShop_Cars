@@ -1,4 +1,5 @@
 import { GoodsType, ParamsType } from "../common/types/types";
+import { FormType } from "../components/postCarForm/postCar";
 import { instance } from "./interceptors/interceptors";
 
 export const carsApiService = {
@@ -12,4 +13,17 @@ export const carsApiService = {
       },
     }),
   likeCar: (id: string) => instance.post<void>(`cars/like/${id}`),
+  postCar: (data: FormType) =>
+    instance.post<GoodsType>(
+      `/cars`,
+      {
+        ...data,
+        currency_type: "UAH",
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    ),
 };

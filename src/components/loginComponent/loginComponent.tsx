@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import * as Tabs from "@radix-ui/react-tabs";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -105,7 +106,7 @@ export const LoginFrom = () => {
               }}
             >
               <Typography>
-                {/*<Link to={"/forgotYourPassword"}>Forgot Password?</Link>*/}
+                <Link to={"/forgotYourPassword"}>Forgot Password?</Link>
               </Typography>
               <button className="Button green">LogIn</button>
             </div>

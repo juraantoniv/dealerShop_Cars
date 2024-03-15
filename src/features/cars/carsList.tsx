@@ -5,16 +5,24 @@ import { useSelector } from "react-redux";
 
 import { CardItem } from "../../components/card/cardItem";
 import { SelectItemsCount } from "../../components/selectCountItems/selectItemsCount";
-import { userThunks } from "../../store/slices";
-import { selectCars, selectCount, useAppDispatch } from "../../store/store";
+import { userActions, userThunks } from "../../store/slices";
+import {
+  selectCars,
+  selectCount,
+  setOffset,
+  useAppDispatch,
+} from "../../store/store";
 import s from "./carList.module.css";
 
 export const CarList = () => {
   const dispatch = useAppDispatch();
 
   const cars = useSelector(selectCars);
+  const skip = useSelector(setOffset);
   const amountPages = Math.ceil(cars?.total / cars?.limit);
   const itemPage = useSelector(selectCount);
+
+  console.log(skip);
 
   useEffect(() => {
     dispatch(userThunks.fetchGoods({ limit: itemPage.toString() }));
@@ -22,6 +30,7 @@ export const CarList = () => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     const items = itemPage * (value - 1);
+    dispatch(userActions.setOffset(items));
     dispatch(
       userThunks.fetchGoods({
         limit: String(cars?.limit),

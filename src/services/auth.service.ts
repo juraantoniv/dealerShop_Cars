@@ -12,4 +12,5 @@ export const authService = {
     instance.post<ITokensForRefresh>("/auth/refresh", {
       refresh_token: refreshToken,
     }),
+  logOut: () => instance.post("auth/logout"),
 };

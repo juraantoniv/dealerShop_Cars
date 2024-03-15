@@ -12,7 +12,6 @@ export const SelectItemsCount = () => {
   const dispatch = useAppDispatch();
 
   const itemPage = useSelector(selectCount);
-  console.log(itemPage);
 
   const handleChange = async (event: SelectChangeEvent) => {
     console.log(event.target.value);

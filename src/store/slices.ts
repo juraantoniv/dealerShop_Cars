@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
-import { GoodsType, ParamsType } from "../common/types/types";
+import { DataCars, GoodsType, ParamsType } from "../common/types/types";
+import { FormType } from "../components/postCarForm/postCar";
 import { carsApiService } from "../services/cars.service";
 import { createAppAsyncThunk } from "./create-app-thunk";
 import { AppDispatch, AppRootStateType } from "./store";
@@ -11,7 +12,7 @@ const initialState = {
   user: {},
   id: "",
   buyItems: [] as GoodsType[] | [],
-  page: 1,
+  offset: 0,
   count: 5,
 };
 
@@ -24,6 +25,9 @@ const slice = createSlice({
     },
     setCount: (state, action) => {
       state.count = action.payload;
+    },
+    setOffset: (state, action) => {
+      state.offset = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -53,6 +57,17 @@ const fetchGoods = createAppAsyncThunk<GoodsType, ParamsType | void>(
     });
   },
 );
+const postCar = createAppAsyncThunk<DataCars, FormType>(
+  "cars/postCar",
+  async (arg, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    return thunkTryCatch(thunkAPI, async () => {
+      const goods = await carsApiService.postCar(arg);
+
+      return goods.data;
+    });
+  },
+);
 
 const likeCar = createAppAsyncThunk<void, string>(
   "cars/likeCar",
@@ -69,6 +84,7 @@ export const userActions = slice.actions;
 export const userThunks = {
   fetchGoods,
   likeCar,
+  postCar,
 };
 
 export const thunkTryCatch = async (

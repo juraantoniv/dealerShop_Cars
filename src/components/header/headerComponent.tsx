@@ -11,8 +11,12 @@ import { KeyboardEvent, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { userThunks } from "../../store/slices";
-import { selectUser, useAppDispatch } from "../../store/store";
+import { selectCars, selectUser, useAppDispatch } from "../../store/store";
 import { LoginFrom } from "../loginComponent/loginComponent";
+import LoginDiag from "../loginForm/postCar";
+import AlertDialog from "../postCarForm/postCar";
+import AlertDialogDemo from "../radixComponents/alertDiag/alertDiag";
+import { LogOut } from "../radixComponents/logOut/logOut";
 import s from "./headerComponent.module.css";
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,8 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-  const user = useSelector(selectUser);
-  const [show, setShow] = useState(false);
+  const { data } = useSelector(selectCars);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -70,11 +73,7 @@ export default function SearchAppBar() {
   ) => {
     setTitle(event.currentTarget.value);
   };
-
-  const showLoginForm = () => {
-    setShow(!show);
-  };
-
+  console.log(data);
   const addItemHandler = () => {
     if (title.trim() !== "") {
       dispatch(userThunks.fetchGoods({ search: title }));
@@ -128,18 +127,16 @@ export default function SearchAppBar() {
             </Search>
           </Box>
 
+          <AlertDialog />
           <Avatar
             alt="Remy Sharp"
             src="/static/images/avatar/1.jpg"
             sx={{ width: 24, height: 24 }}
             onClick={handleClick}
           />
-          <Button onClick={showLoginForm} variant="contained">
-            Login
-          </Button>
+          {!data ? <AlertDialogDemo /> : <LogOut />}
         </Toolbar>
       </AppBar>
-      {show ? <LoginFrom /> : null}
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
