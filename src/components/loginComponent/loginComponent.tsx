@@ -18,6 +18,7 @@ import {
 import { authService } from "../../services/auth.service";
 import { userActions, userThunks } from "../../store/slices";
 import { useAppDispatch } from "../../store/store";
+import { RecoveryPasswordDiag } from "../forgotPassword/LoginDiag";
 
 const Schema = z.object({
   password: z.string().min(1),
@@ -105,9 +106,7 @@ export const LoginFrom = () => {
                 justifyContent: "flex-end",
               }}
             >
-              <Typography>
-                <Link to={"/forgotYourPassword"}>Forgot Password?</Link>
-              </Typography>
+              <RecoveryPasswordDiag />
               <button className="Button green">LogIn</button>
             </div>
           </form>

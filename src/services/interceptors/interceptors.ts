@@ -34,61 +34,31 @@ instance.interceptors.request.use(
 );
 
 let isRefreshing = false;
-
 instance.interceptors.response.use(
   (configs) => {
     return configs;
   },
   async (error) => {
-    const originalRequest = error.config;
+    const refresh = getLocalRefreshToken();
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      if (isRefreshing) {
-        // If another request is already refreshing the token, wait and retry the original request
-        return new Promise((resolve) => {
-          setTimeout(async () => {
-            try {
-              const tokens = await authService.refresh(getLocalRefreshToken());
-              if (tokens) {
-                setLocalAccessToken(tokens.data.accessToken);
-                setLocalRefreshToken(tokens.data.refreshToken);
-                originalRequest.headers["Authorization"] =
-                  "Bearer " + tokens.data.accessToken;
-                resolve(instance(originalRequest));
-              }
-            } catch (refreshError) {
-              deleteTokens();
-              await Promise.reject(refreshError);
-              // Redirect to login or handle as necessary
-            }
-          }, 1000); // Wait 1 second before retrying
-        });
-      }
-
-      // Set a flag to indicate that the request is being retried
-      originalRequest._retry = true;
+    if (error.response?.status === 401 && refresh && !isRefreshing) {
       isRefreshing = true;
 
       try {
-        const tokens = await authService.refresh(getLocalRefreshToken());
+        const tokens = await authService.refresh(refresh);
+
         if (tokens) {
           setLocalAccessToken(tokens.data.accessToken);
           setLocalRefreshToken(tokens.data.refreshToken);
-          originalRequest.headers["Authorization"] =
-            "Bearer " + tokens.data.accessToken;
-          return instance(originalRequest);
         }
-      } catch (refreshError) {
+      } catch (e) {
         deleteTokens();
-        // Redirect to login or handle as necessary
         // history.replace('/login?expSession=true')
-        throw refreshError;
-      } finally {
-        isRefreshing = false;
       }
-    }
+      isRefreshing = false;
 
-    // For other errors, reject the request
+      return instance(error.config);
+    }
     return Promise.reject(error);
   },
 );

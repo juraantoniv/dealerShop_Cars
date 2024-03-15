@@ -30,6 +30,7 @@ export type ParamsType = {
   price?: number;
   search?: string;
   offset?: string;
+  ORDER?: string;
 };
 
 export type ITokensPair = {

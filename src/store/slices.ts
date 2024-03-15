@@ -29,6 +29,9 @@ const slice = createSlice({
     setOffset: (state, action) => {
       state.offset = action.payload;
     },
+    logOff: (state, action) => {
+      state.data = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGoods.fulfilled, (state, action) => {

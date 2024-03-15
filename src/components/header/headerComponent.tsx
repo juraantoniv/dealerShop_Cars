@@ -12,10 +12,10 @@ import { useSelector } from "react-redux";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
-import { LoginFrom } from "../loginComponent/loginComponent";
-import LoginDiag from "../loginForm/postCar";
-import AlertDialog from "../postCarForm/postCar";
-import AlertDialogDemo from "../radixComponents/alertDiag/alertDiag";
+import PostCarDialog from "../postCarForm/postCar";
+// import { LoginFrom } from "../loginComponent/loginComponent";
+// import LoginDiag from "../loginForm/postCar";
+import { LoginDiag } from "../radixComponents/alertDiag/LoginDiag";
 import { LogOut } from "../radixComponents/logOut/logOut";
 import s from "./headerComponent.module.css";
 
@@ -112,29 +112,35 @@ export default function SearchAppBar() {
             >
               Cars
             </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={search}
-                value={title}
-                error={!!error}
-                onKeyPress={onKeyPressHandler}
-              />
-            </Search>
+            {data ? (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={search}
+                  value={title}
+                  error={!!error}
+                  onKeyPress={onKeyPressHandler}
+                />
+              </Search>
+            ) : null}
           </Box>
 
-          <AlertDialog />
-          <Avatar
-            alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
-            sx={{ width: 24, height: 24 }}
-            onClick={handleClick}
-          />
-          {!data ? <AlertDialogDemo /> : <LogOut />}
+          <Box className={s.rightBoxToll}>
+            {data ? <PostCarDialog /> : null}
+            {data ? (
+              <Avatar
+                alt="Remy Sharp"
+                src="/static/images/avatar/1.jpg"
+                sx={{ width: 24, height: 24 }}
+                onClick={handleClick}
+              />
+            ) : null}
+            {!data ? <LoginDiag /> : <LogOut />}
+          </Box>
         </Toolbar>
       </AppBar>
       <Menu

@@ -1,8 +1,7 @@
 
 .tollBar{
     display: flex;
-    width: 90%;
-    align-items: center;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -10,4 +9,11 @@
     display: flex;
     justify-content: space-around;
     width: 20%;
+}
+
+.rightBoxToll{
+    display: flex;
+    align-items: center;
+    width: 40%;
+    gap: 20px;
 }

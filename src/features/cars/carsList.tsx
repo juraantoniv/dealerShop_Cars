@@ -1,10 +1,12 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { CardItem } from "../../components/card/cardItem";
+import { SelectComponent } from "../../components/selectComponent/selectComponent";
 import { SelectItemsCount } from "../../components/selectCountItems/selectItemsCount";
+import { SortComponent } from "../../components/sortComponent/sortComponent";
 import { userActions, userThunks } from "../../store/slices";
 import {
   selectCars,
@@ -21,8 +23,22 @@ export const CarList = () => {
   const skip = useSelector(setOffset);
   const amountPages = Math.ceil(cars?.total / cars?.limit);
   const itemPage = useSelector(selectCount);
+  const [sortDirection, setSort] = useState<boolean>(false);
+  const [currency, setCurrency] = React.useState("");
 
-  console.log(skip);
+  const sort = (direction: boolean) => {
+    setSort(direction);
+    dispatch(
+      userThunks.fetchGoods({
+        limit: String(cars?.limit),
+        offset: skip.toString(),
+        ORDER: sortDirection ? "ASC" : "DESC",
+      }),
+    );
+  };
+  const currencyType = (type: string) => {
+    setCurrency(type);
+  };
 
   useEffect(() => {
     dispatch(userThunks.fetchGoods({ limit: itemPage.toString() }));
@@ -42,10 +58,14 @@ export const CarList = () => {
   return (
     <div className={s.container}>
       <div className={s.sideContainer}>
-        <SelectItemsCount />
+        <div className={s.sortContainer}>
+          <SelectItemsCount />
+          <SortComponent sortDirectionCallBack={sort} />
+        </div>
+        <SelectComponent setCurrencyType={currencyType} />
       </div>
       <Box className={s.contentContainer}>
-        <CardItem items={cars.data} />
+        <CardItem items={cars.data} currencyType={currency} />
         <Pagination
           sx={{ marginTop: "30px" }}
           count={amountPages}

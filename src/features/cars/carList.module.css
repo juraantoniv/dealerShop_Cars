@@ -18,3 +18,11 @@
     margin-left: 10px;
 }
 
+.sortContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    margin: 5px;
+}
+

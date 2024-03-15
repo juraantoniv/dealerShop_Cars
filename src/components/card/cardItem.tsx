@@ -26,13 +26,13 @@ import s from "./cardItem.module.css";
 
 type cardContent = {
   items: Array<DataCars>;
+  currencyType: string;
 };
 
-export const CardItem: React.FC<cardContent> = ({ items }) => {
+export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   const dispatch = useAppDispatch();
   const itemPage = useSelector(selectCount);
   const skip = useSelector(setOffset);
-  console.log(skip);
   const likeCar = (id: string) => {
     dispatch(userThunks.likeCar(id))
       .unwrap()
@@ -56,6 +56,8 @@ export const CardItem: React.FC<cardContent> = ({ items }) => {
       });
   };
 
+  const cur = currencyType ? currencyType : "UAH";
+
   return (
     <Grid
       container
@@ -78,7 +80,11 @@ export const CardItem: React.FC<cardContent> = ({ items }) => {
                   {el.brand}
                 </Typography>
                 <Typography variant={"caption"} fontWeight={"bold"}>
-                  {findValueByKey(el.currency, "UAH")} UAH
+                  {findValueByKey(
+                    el.currency,
+                    currencyType ? currencyType : "UAH",
+                  )}
+                  ${cur}
                 </Typography>
               </Box>
               <Typography

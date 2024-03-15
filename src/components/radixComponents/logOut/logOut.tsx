@@ -6,7 +6,7 @@ import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import React from "react";
 
 import { authService } from "../../../services/auth.service";
-import { userThunks } from "../../../store/slices";
+import { userActions, userThunks } from "../../../store/slices";
 import { useAppDispatch } from "../../../store/store";
 
 export const LogOut = () => {
@@ -14,6 +14,7 @@ export const LogOut = () => {
   const logOutHandler = async () => {
     try {
       await authService.logOut();
+      dispatch(userActions.logOff({}));
     } catch (e) {}
   };
 

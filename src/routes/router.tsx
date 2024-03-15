@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import RecoveryPassword from "../components/forgotPassword/recoveryPassword";
 import { CarList } from "../features/cars/carsList";
 import { MainLayout } from "../layouts/mainLayout";
 

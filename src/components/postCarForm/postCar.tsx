@@ -19,15 +19,6 @@ import { z } from "zod";
 import { userActions, userThunks } from "../../store/slices";
 import { useAppDispatch } from "../../store/store";
 
-const MAX_FILE_SIZE = 5000000;
-function checkFileType(file: File) {
-  if (file?.name) {
-    const fileType = file.name.split(".").pop();
-    if (fileType === "docx" || fileType === "pdf") return true;
-  }
-  return false;
-}
-
 const Schema = z.object({
   brand: z.string().min(1),
   brand2: z.string().optional(),
@@ -39,7 +30,7 @@ const Schema = z.object({
 
 export type FormType = z.infer<typeof Schema>;
 
-export default function AlertDialog() {
+export default function PostCarDialog() {
   const {
     handleSubmit,
     register,
@@ -59,8 +50,6 @@ export default function AlertDialog() {
     setOpen(false);
   };
   const onSubmit = (data: FormType) => {
-    const formData = new FormData();
-
     // formData.append("questionImg", data);
 
     dispatch(
