@@ -44,6 +44,8 @@ instance.interceptors.response.use(
     if (error.response?.status === 401 && refresh && !isRefreshing) {
       isRefreshing = true;
 
+      console.log("call");
+
       try {
         const tokens = await authService.refresh(refresh);
 

@@ -12,9 +12,11 @@ import { useSelector } from "react-redux";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
+import { CrateAccountModal } from "../myAccountForm/crateAccountModal";
+import { MyAccountModal } from "../myAccountForm/myAccountModal";
 import PostCarDialog from "../postCarForm/postCar";
 // import { LoginFrom } from "../loginComponent/loginComponent";
-// import LoginDiag from "../loginForm/postCar";
+// import LoginDiag from "../myAccountForm/postCar";
 import { LoginDiag } from "../radixComponents/alertDiag/LoginDiag";
 import { LogOut } from "../radixComponents/logOut/logOut";
 import s from "./headerComponent.module.css";
@@ -144,8 +146,7 @@ export default function SearchAppBar() {
         </Toolbar>
       </AppBar>
       <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        className={s.menu}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -158,8 +159,8 @@ export default function SearchAppBar() {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <CrateAccountModal />
+        <MyAccountModal />
       </Menu>
     </Box>
   );

@@ -1,4 +1,6 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import EuroIcon from "@mui/icons-material/Euro";
 import {
   Badge,
   Button,
@@ -79,12 +81,20 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
                 <Typography gutterBottom variant="h5" component="div">
                   {el.brand}
                 </Typography>
-                <Typography variant={"caption"} fontWeight={"bold"}>
+                <Typography variant={"caption"} fontSize={"large"}>
                   {findValueByKey(
                     el.currency,
                     currencyType ? currencyType : "UAH",
                   )}
-                  ${cur}
+                  <Typography fontStyle={"inherit"} variant={"button"}>
+                    {cur === "EUR" ? (
+                      <EuroIcon />
+                    ) : cur === "USD" ? (
+                      <AttachMoneyIcon />
+                    ) : (
+                      "UAH"
+                    )}
+                  </Typography>
                 </Typography>
               </Box>
               <Typography
