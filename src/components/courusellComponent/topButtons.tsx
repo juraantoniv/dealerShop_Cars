@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
 import IconPauseCircle from "../svg/pause";
 import { IconPlayCircle } from "../svg/play";

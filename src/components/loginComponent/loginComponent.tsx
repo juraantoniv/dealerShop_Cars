@@ -2,12 +2,9 @@ import "./styles.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Typography from "@mui/material/Typography";
 import * as Tabs from "@radix-ui/react-tabs";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
@@ -95,7 +92,7 @@ export const LoginFrom = () => {
                 {...register("password")}
                 className="Input"
                 id="username"
-                defaultValue="@peduarte"
+                defaultValue="123456"
               />
               {errors.password && <span>This field is required</span>}
             </fieldset>

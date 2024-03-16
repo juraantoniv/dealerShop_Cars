@@ -1,5 +1,6 @@
 import { ITokensForRefresh, ITokensPair } from "../common/types/types";
 import { FormType } from "../components/loginComponent/loginComponent";
+import { FormTypeForUpdate } from "../components/myAccountForm/myAccount";
 import { instance } from "./interceptors/interceptors";
 
 export const authService = {
@@ -13,4 +14,11 @@ export const authService = {
       refresh_token: refreshToken,
     }),
   logOut: () => instance.post("auth/logout"),
+};
+
+export const userService = {
+  updateUserData: (user: FormTypeForUpdate) =>
+    instance.patch("users", {
+      ...user,
+    }),
 };

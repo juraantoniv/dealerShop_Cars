@@ -10,7 +10,6 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  IconButton,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -38,7 +37,7 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   const likeCar = (id: string) => {
     dispatch(userThunks.likeCar(id))
       .unwrap()
-      .then((data) => {
+      .then(() => {
         dispatch(
           userThunks.fetchGoods({
             limit: itemPage.toString(),
@@ -68,11 +67,11 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
       gap={3}
     >
       {items?.map((el) => (
-        <Card sx={{ width: "15% " }}>
+        <Card sx={{ width: "15% ", height: "350px" }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              height="50%"
+              height="100px"
               image={el.image}
               alt="green iguana"
             />

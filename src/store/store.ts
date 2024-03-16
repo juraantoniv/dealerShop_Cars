@@ -33,4 +33,5 @@ export const selectCars = (state: AppRootStateType) => state.cars.data;
 export const selectUser = (state: AppRootStateType) => state.cars.user;
 export const selectCount = (state: AppRootStateType) => state.cars.count;
 export const setOffset = (state: AppRootStateType) => state.cars.offset;
+export const loadingStatus = (state: AppRootStateType) => state.cars.loading;
 // export const selectBuy = (state: AppRootStateType) => state.users.buyItems;

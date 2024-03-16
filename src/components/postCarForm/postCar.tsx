@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -7,17 +6,22 @@ import { MenuItem, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { userActions, userThunks } from "../../store/slices";
-import { useAppDispatch } from "../../store/store";
+import { userThunks } from "../../store/slices";
+import {
+  selectCars,
+  selectCount,
+  setOffset,
+  useAppDispatch,
+} from "../../store/store";
 
 const Schema = z.object({
   brand: z.string().min(1),
@@ -41,7 +45,10 @@ export default function PostCarDialog() {
   });
   const [open, setOpen] = React.useState(false);
   const dispatch = useAppDispatch();
-  console.log(errors);
+  const skip = useSelector(setOffset);
+  const itemPage = useSelector(selectCount);
+  const [sortDirection, setSort] = useState<boolean>(false);
+  const cars = useSelector(selectCars);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,15 +59,27 @@ export default function PostCarDialog() {
   const onSubmit = (data: FormType) => {
     // formData.append("questionImg", data);
 
-    dispatch(
-      userThunks.postCar({
-        ...data,
-        brand: data.brand2 ? data.brand2 : data.brand,
-        image: data.image[0],
-      }),
-    );
-    dispatch(userThunks.fetchGoods());
-    handleClose();
+    try {
+      dispatch(
+        userThunks.postCar({
+          ...data,
+          brand: data.brand2 ? data.brand2 : data.brand,
+          image: data.image[0],
+        }),
+      ).then(() => {
+        toast.info(`Car ${data.model} was  created `, {
+          position: "bottom-right",
+        });
+      });
+      dispatch(
+        userThunks.fetchGoods({
+          limit: String(cars?.limit),
+          offset: skip.toString(),
+          ORDER: sortDirection ? "ASC" : "DESC",
+        }),
+      );
+      handleClose();
+    } catch (e) {}
   };
 
   return (

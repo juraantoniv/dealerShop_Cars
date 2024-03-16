@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 import { GoodsType, ParamsType } from "../common/types/types";
 import { FormType } from "../components/postCarForm/postCar";
 import { instance } from "./interceptors/interceptors";
@@ -18,7 +20,11 @@ export const carsApiService = {
     instance.post<GoodsType>(
       `/cars`,
       {
-        ...data,
+        brand: data.brand,
+        description: data.description,
+        model: data.model,
+        price: data.price,
+        image: data.image,
         currency_type: "UAH",
       },
       {

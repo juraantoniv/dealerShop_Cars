@@ -10,6 +10,13 @@ export type GoodsType = {
   data: DataCars[];
 };
 
+export type UserInfoType = {
+  name?: string;
+  city?: string;
+  age?: string;
+  avatar?: string;
+};
+
 export type DataCars = {
   id: string;
   model: string;

@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isFulfilled, isPending } from "@reduxjs/toolkit";
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
-import { DataCars, GoodsType, ParamsType } from "../common/types/types";
+import {
+  DataCars,
+  GoodsType,
+  ParamsType,
+  UserInfoType,
+} from "../common/types/types";
 import { FormType } from "../components/postCarForm/postCar";
 import { carsApiService } from "../services/cars.service";
 import { createAppAsyncThunk } from "./create-app-thunk";
@@ -9,11 +14,12 @@ import { AppDispatch, AppRootStateType } from "./store";
 
 const initialState = {
   data: {} as GoodsType,
-  user: {},
+  user: {} as UserInfoType,
   id: "",
   buyItems: [] as GoodsType[] | [],
   offset: 0,
   count: 5,
+  loading: "",
 };
 
 const slice = createSlice({
@@ -37,6 +43,13 @@ const slice = createSlice({
     builder.addCase(fetchGoods.fulfilled, (state, action) => {
       state.data = action.payload;
     });
+    builder.addMatcher(isPending(userThunks.fetchGoods), (state) => {
+      state.loading = "loading";
+    });
+    builder.addMatcher(isFulfilled(userThunks.fetchGoods), (state) => {
+      state.loading = "fulfilled";
+    });
+
     // .addCase(deleteGood.fulfilled, (state, action) => {
     //   state.id = action.payload;
     // })

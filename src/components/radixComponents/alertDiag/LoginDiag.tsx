@@ -1,18 +1,10 @@
 import "./styles.css";
 
 import LoginIcon from "@mui/icons-material/Login";
-import {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  Modal,
-} from "@mui/material";
+import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
-import React, { useState } from "react";
+import React from "react";
 
 import { LoginFrom } from "../../loginComponent/loginComponent";
 

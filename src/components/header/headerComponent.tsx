@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { Avatar, Menu } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
@@ -70,6 +70,7 @@ export default function SearchAppBar() {
   const [error, setError] = useState<string | null>(null);
   const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
   const search = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
@@ -136,7 +137,7 @@ export default function SearchAppBar() {
             {data ? (
               <Avatar
                 alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
+                src={user.avatar}
                 sx={{ width: 24, height: 24 }}
                 onClick={handleClick}
               />

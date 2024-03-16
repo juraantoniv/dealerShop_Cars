@@ -2,7 +2,6 @@ import "./recoveryPassword.module.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as Tabs from "@radix-ui/react-tabs";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -25,10 +24,10 @@ const RecoveryPassword = () => {
     resolver: zodResolver(Schema),
   });
 
-  const onSubmit = async (data: FormType) => {
+  const onSubmit = async () => {
     try {
-    } catch (e: any) {
-      toast.warn(`${e.response.data}`);
+    } catch (e) {
+      toast.warn(`${e}`);
     }
   };
 

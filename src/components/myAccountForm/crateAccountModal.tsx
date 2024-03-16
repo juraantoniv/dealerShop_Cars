@@ -1,9 +1,8 @@
-import { Link, MenuItem, Modal } from "@mui/material";
+import { PersonAdd } from "@mui/icons-material";
+import { ListItemIcon, MenuItem, Modal } from "@mui/material";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import React from "react";
 
-import { LoginFrom } from "../loginComponent/loginComponent";
 import PostUserDialog from "./createAccount";
 
 export const CrateAccountModal = () => {
@@ -18,7 +17,12 @@ export const CrateAccountModal = () => {
   };
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}>Create account</MenuItem>
+      <MenuItem onClick={handleClickOpen}>
+        <ListItemIcon>
+          <PersonAdd fontSize="small" />
+        </ListItemIcon>
+        Add another account
+      </MenuItem>
       <Modal
         open={open}
         onClose={handleClose}

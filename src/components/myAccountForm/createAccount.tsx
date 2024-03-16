@@ -1,10 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import PostAddIcon from "@mui/icons-material/PostAdd";
-import { MenuItem, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -117,7 +116,7 @@ export default function PostUserDialog() {
           />
           <TextField
             {...register("password")}
-            name={"description"}
+            name={"password"}
             size={"small"}
             helperText="Please enter password"
             id="demo-helper-text-aligned"

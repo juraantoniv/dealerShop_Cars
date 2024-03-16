@@ -1,9 +1,7 @@
-import { Link, MenuItem, Modal } from "@mui/material";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { ListItemIcon, MenuItem, Modal } from "@mui/material";
 import React from "react";
 
-import { LoginFrom } from "../loginComponent/loginComponent";
 import { MyAccount } from "./myAccount";
 
 export const MyAccountModal = () => {
@@ -18,7 +16,12 @@ export const MyAccountModal = () => {
   };
   return (
     <div>
-      <MenuItem onClick={handleClickOpen}>My account</MenuItem>
+      <MenuItem onClick={handleClickOpen}>
+        <ListItemIcon>
+          <AccountCircleIcon fontSize={"small"} />
+        </ListItemIcon>
+        My account
+      </MenuItem>
       <Modal
         open={open}
         onClose={handleClose}
