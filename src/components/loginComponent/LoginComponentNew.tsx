@@ -128,6 +128,7 @@ export const SignIn: React.FC<SignType> = ({ callback }) => {
               margin="normal"
               required
               fullWidth
+              error={!!errors?.password?.message}
               name="password"
               label="Password"
               type="password"

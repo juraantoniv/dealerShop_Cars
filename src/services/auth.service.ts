@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 import { ITokensForRefresh, ITokensPair } from "../common/types/types";
-import { FormType } from "../components/loginComponent/loginComponent";
+import { FormTypeForChangePassword } from "../components/loginComponent/ChangePassword";
+import { FormType } from "../components/loginComponent/LoginComponentNew";
 import { FormTypeCreateUserNew } from "../components/myAccountForm/CreateAccountNew";
 import { FormTypeForUpdate } from "../components/myAccountForm/myAccount";
 import { instance } from "./interceptors/interceptors";
@@ -20,6 +21,11 @@ export const authService = {
   forgotPassword: (email: string) =>
     instance.post("auth/recovery_password", {
       email,
+    }),
+  changePassword: (data: FormTypeForChangePassword) =>
+    instance.post("auth/change_password", {
+      new_password: data.new_password1,
+      old_password: data.old_password,
     }),
   createUser: (user: FormTypeCreateUserNew) =>
     instance.post(

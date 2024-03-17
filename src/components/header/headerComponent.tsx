@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
+import { RecoveryPasswordDiag } from "../forgotPassword/LoginDiag";
 import { CrateAccountModal } from "../myAccountForm/crateAccountModal";
 import { MyAccountModal } from "../myAccountForm/myAccountModal";
 import PostCarDialog from "../postCarForm/postCar";
@@ -163,6 +164,7 @@ export default function SearchAppBar() {
       >
         <CrateAccountModal callBack={handleClose} />
         <MyAccountModal />
+        <RecoveryPasswordDiag />
       </Menu>
     </Box>
   );

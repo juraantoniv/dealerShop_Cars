@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import RecoveryPassword from "../components/forgotPassword/recoveryPassword";
-import { ChangePassword } from "../components/loginComponent/loginComponent";
+import { ChangePassword } from "../components/loginComponent/ChangePassword";
 import { SignUp } from "../components/myAccountForm/CreateAccountNew";
 import { CarList } from "../features/cars/carsList";
 import { MainLayout } from "../layouts/mainLayout";
@@ -19,10 +19,6 @@ const privateRoutes: RouteObject[] = [
   {
     path: "create",
     element: <SignUp />,
-  },
-  {
-    path: "change_password",
-    element: <ChangePassword />,
   },
   {
     path: "forgot_password",

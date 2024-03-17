@@ -81,7 +81,6 @@ export const SignUp = () => {
   console.log(errors);
 
   const onSubmit = async (data: FormTypeCreateUserNew) => {
-    console.log(data);
     try {
       await authService.createUser({ ...data, file: data.file[0] });
       toast.info("User created", {
