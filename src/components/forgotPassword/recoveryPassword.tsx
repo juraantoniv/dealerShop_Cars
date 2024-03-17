@@ -7,25 +7,31 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
+import { authService } from "../../services/auth.service";
 import s from "./recoveryPassword.module.css";
 
 const Schema = z.object({
   email: z.string().email({ message: "Email is not valid" }),
 });
 
-export type FormType = z.infer<typeof Schema>;
+export type FormTypeEmail = z.infer<typeof Schema>;
 
 const RecoveryPassword = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<FormType>({
+  } = useForm<FormTypeEmail>({
     resolver: zodResolver(Schema),
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: FormTypeEmail) => {
     try {
+      await authService.forgotPassword(data.email);
+      toast.warn("Please check your email", {
+        type: "info",
+        theme: "colored",
+      });
     } catch (e) {
       toast.warn(`${e}`);
     }
@@ -46,7 +52,8 @@ const RecoveryPassword = () => {
               {...register("email")}
               className="Input"
               id="name"
-              defaultValue="Pedro Duarte"
+              name={"email"}
+              defaultValue="your@email.com"
             />
             {errors.email?.message && <span>{errors?.email?.message}</span>}
           </fieldset>

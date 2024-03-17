@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { KeyboardEvent, useState } from "react";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
@@ -103,7 +104,7 @@ export default function SearchAppBar() {
     setAnchorEl(null);
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className={s.container}>
       <AppBar position="static">
         <Toolbar className={s.tollBar}>
           <Box className={s.leftBoxToll}>

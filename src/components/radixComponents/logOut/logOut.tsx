@@ -15,6 +15,7 @@ export const LogOut = () => {
     try {
       await authService.logOut();
       dispatch(userActions.logOff({}));
+      dispatch(userActions.setCount(5));
     } catch (e) {}
   };
 

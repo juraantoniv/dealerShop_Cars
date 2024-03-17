@@ -5,24 +5,25 @@
 }
 
 .sideContainer{
-    border: 1px solid;
     width: 15%;
+    border: 1px solid;
+    border-radius: 10px;
 }
 
 .contentContainer{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 20px;
     width: 80%;
     border: 1px solid;
+    border-radius: 10px;
     margin-left: 10px;
 }
 
 .sortContainer{
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid;
-    margin: 5px;
+
 }
 

@@ -156,7 +156,7 @@ export default function PostCarDialog() {
                 </MenuItem>
               </TextField>
               <Typography variant={"subtitle2"}>
-                If you didn't found your of car write down
+                If you didn't found your car write down it
               </Typography>
               <TextField
                 {...register("brand2")}

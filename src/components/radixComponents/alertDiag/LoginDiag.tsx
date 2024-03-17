@@ -5,20 +5,18 @@ import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { LoginFrom } from "../../loginComponent/loginComponent";
+import { SignIn } from "../../loginComponent/LoginComponentNew";
 
 export const LoginDiag = () => {
-  // const [open, setOpen] = useState(false);
-  //
-  // const setOpenHandler = (open: boolean) => {
-  //   setOpen(open);
-  // };
+  const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
+    navigate("/");
   };
 
   const handleClose = () => {
@@ -40,7 +38,7 @@ export const LoginDiag = () => {
         aria-describedby="parent-modal-description"
       >
         <Box>
-          <LoginFrom />
+          <SignIn callback={handleClose} />
         </Box>
       </Modal>
     </div>

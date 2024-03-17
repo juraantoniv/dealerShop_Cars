@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { ITokensForRefresh, ITokensPair } from "../common/types/types";
 import { FormType } from "../components/loginComponent/loginComponent";
-import { FormTypeCreateUser } from "../components/myAccountForm/createAccount";
+import { FormTypeCreateUserNew } from "../components/myAccountForm/CreateAccountNew";
 import { FormTypeForUpdate } from "../components/myAccountForm/myAccount";
 import { instance } from "./interceptors/interceptors";
 
@@ -17,7 +17,11 @@ export const authService = {
       refresh_token: refreshToken,
     }),
   logOut: () => instance.post("auth/logout"),
-  createUser: (user: FormTypeCreateUser) =>
+  forgotPassword: (email: string) =>
+    instance.post("auth/recovery_password", {
+      email,
+    }),
+  createUser: (user: FormTypeCreateUserNew) =>
     instance.post(
       "auth/sign-up",
       {

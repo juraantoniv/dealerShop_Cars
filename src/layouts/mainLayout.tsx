@@ -2,6 +2,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import SearchAppBar from "../components/header/headerComponent";
 import { FooterPage } from "../features/footer/reactFooter";
@@ -32,14 +33,14 @@ export const MainLayout = () => {
 
   return (
     <>
+      <ToastContainer />
       <SearchAppBar />
       {loading === "loading" ? <LinearProgress /> : null}
-      {data ? (
-        <>
-          <Outlet />
-          <FooterPage />
-        </>
-      ) : null}
+
+      <>
+        <Outlet />
+        {data ? <FooterPage /> : null}
+      </>
     </>
   );
 };

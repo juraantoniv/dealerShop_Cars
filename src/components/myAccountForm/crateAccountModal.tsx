@@ -3,7 +3,7 @@ import { ListItemIcon, MenuItem, Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 
-import PostUserDialog from "./createAccount";
+import { SignUp } from "./CreateAccountNew";
 
 type CrateAccountModalType = {
   callBack: () => void;
@@ -36,7 +36,7 @@ export const CrateAccountModal: React.FC<CrateAccountModalType> = ({
         aria-describedby="parent-modal-description"
       >
         <Box>
-          <PostUserDialog />
+          <SignUp />
         </Box>
       </Modal>
     </div>

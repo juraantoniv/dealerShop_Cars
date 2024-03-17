@@ -24,7 +24,7 @@ const Schema = z.object({
 
 export type FormType = z.infer<typeof Schema>;
 
-export const LoginFrom = () => {
+export const ChangePassword = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -142,7 +142,6 @@ export const LoginFrom = () => {
             <button className="Button green">Change password</button>
           </div>
         </Tabs.Content>
-        <ToastContainer />
       </Tabs.Root>
     </>
   );

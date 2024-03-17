@@ -130,7 +130,6 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
               </Button>
             </CardActions>
             <CarOrder id={el.id} />
-            <ToastContainer />
           </Card>
         </Grid>
       ))}

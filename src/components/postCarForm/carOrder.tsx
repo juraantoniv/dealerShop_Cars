@@ -6,11 +6,7 @@ import { AxiosError } from "axios";
 import React from "react";
 import { toast } from "react-toastify";
 
-import { isAxiosError } from "../../common/func/axiosError";
-import { authService } from "../../services/auth.service";
 import { carsApiService } from "../../services/cars.service";
-import { userActions } from "../../store/slices";
-import { useAppDispatch } from "../../store/store";
 
 type CarOrderType = {
   id: string;
@@ -50,7 +46,13 @@ export const CarOrder: React.FC<CarOrderType> = ({ id }) => {
           <AlertDialog.Description className="AlertDialogDescription">
             This action cannot be undone.
           </AlertDialog.Description>
-          <div style={{ display: "flex", gap: 25, justifyContent: "flex-end" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 25,
+              justifyContent: "flex-end",
+            }}
+          >
             <AlertDialog.Cancel asChild>
               <button className="Button mauve">Cancel</button>
             </AlertDialog.Cancel>

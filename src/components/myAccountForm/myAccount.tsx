@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -20,7 +21,11 @@ const Schema = z.object({
 });
 
 export type FormTypeForUpdate = z.infer<typeof Schema>;
-export function MyAccount() {
+
+type MyType = {
+  close: () => void;
+};
+export const MyAccount: React.FC<MyType> = ({ close }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
 
   const user = useSelector(selectUser);
@@ -57,6 +62,10 @@ export function MyAccount() {
   return (
     <React.Fragment>
       <Box className={s.box}>
+        <CloseIcon
+          onClick={close}
+          sx={{ cursor: "pointer", marginLeft: "90%" }}
+        />
         <form
           onSubmit={handleSubmit(onSubmit)}
           style={{
@@ -100,4 +109,4 @@ export function MyAccount() {
       </Box>
     </React.Fragment>
   );
-}
+};

@@ -25,6 +25,7 @@ export const CarList = () => {
   const itemPage = useSelector(selectCount);
   const [sortDirection, setSort] = useState<boolean>(false);
   const [currency, setCurrency] = React.useState("");
+  const { data } = useSelector(selectCars);
 
   const sort = (direction: boolean) => {
     setSort(direction);
@@ -61,25 +62,29 @@ export const CarList = () => {
   };
 
   return (
-    <div className={s.container}>
-      <div className={s.sideContainer}>
-        <div className={s.sortContainer}>
-          <SelectItemsCount />
-          <SortComponent sortDirectionCallBack={sort} />
+    <>
+      {data ? (
+        <div className={s.container}>
+          <div className={s.sideContainer}>
+            <div className={s.sortContainer}>
+              <SelectItemsCount />
+              <SortComponent sortDirectionCallBack={sort} />
+            </div>
+            <SelectComponent setCurrencyType={currencyType} />
+          </div>
+          <Box className={s.contentContainer}>
+            <CardItem items={cars.data} currencyType={currency} />
+            <Pagination
+              sx={{ marginTop: "30px" }}
+              count={amountPages}
+              page={cars?.page}
+              onChange={handleChange}
+              variant="outlined"
+              shape="rounded"
+            />
+          </Box>
         </div>
-        <SelectComponent setCurrencyType={currencyType} />
-      </div>
-      <Box className={s.contentContainer}>
-        <CardItem items={cars.data} currencyType={currency} />
-        <Pagination
-          sx={{ marginTop: "30px" }}
-          count={amountPages}
-          page={cars?.page}
-          onChange={handleChange}
-          variant="outlined"
-          shape="rounded"
-        />
-      </Box>
-    </div>
+      ) : null}
+    </>
   );
 };

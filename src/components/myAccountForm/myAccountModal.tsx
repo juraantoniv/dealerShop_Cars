@@ -28,7 +28,7 @@ export const MyAccountModal = () => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <MyAccount />
+        <MyAccount close={handleClose} />
       </Modal>
     </div>
   );
