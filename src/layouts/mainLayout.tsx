@@ -17,10 +17,10 @@ import {
 export const MainLayout = () => {
   const dispatch = useAppDispatch();
   const itemPage = useSelector(selectCount);
-  console.log(itemPage);
   const skip = useSelector(setOffset);
   const loading = useSelector(loadingStatus);
   const { data } = useSelector(selectCars);
+  console.log(skip);
   useEffect(() => {
     dispatch(
       userThunks.fetchGoods({

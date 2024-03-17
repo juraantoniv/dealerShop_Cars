@@ -41,7 +41,12 @@ export const CarList = () => {
   };
 
   useEffect(() => {
-    dispatch(userThunks.fetchGoods({ limit: itemPage.toString() }));
+    dispatch(
+      userThunks.fetchGoods({
+        limit: itemPage.toString(),
+        offset: skip.toString(),
+      }),
+    );
   }, [dispatch]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
