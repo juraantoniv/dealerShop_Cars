@@ -27,6 +27,10 @@ export const authService = {
       new_password: data.new_password1,
       old_password: data.old_password,
     }),
+  recoveryPassword: (password: string, token: string) =>
+    instance.post(`auth/confirm_password/${token}`, {
+      new_password: password,
+    }),
   createUser: (user: FormTypeCreateUserNew) =>
     instance.post(
       "auth/sign-up",

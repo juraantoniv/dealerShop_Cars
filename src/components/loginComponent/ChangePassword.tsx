@@ -32,10 +32,6 @@ const Schema = z
     return data;
   });
 
-type Errors = {
-  confirmPassword: string;
-};
-
 export type FormTypeForChangePassword = z.infer<typeof Schema>;
 
 export const ChangePassword = () => {

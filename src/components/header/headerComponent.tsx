@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
-import { RecoveryPasswordDiag } from "../forgotPassword/LoginDiag";
+import { RecoveryPasswordDiag } from "../forgotPassword/RecoveryPasswordDiag";
 import { CrateAccountModal } from "../myAccountForm/crateAccountModal";
 import { MyAccountModal } from "../myAccountForm/myAccountModal";
 import PostCarDialog from "../postCarForm/postCar";
