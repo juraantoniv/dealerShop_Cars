@@ -20,7 +20,7 @@ export const MainLayout = () => {
   const skip = useSelector(setOffset);
   const loading = useSelector(loadingStatus);
   const { data } = useSelector(selectCars);
-  console.log(skip);
+  console.log(loading);
   useEffect(() => {
     dispatch(
       userThunks.fetchGoods({

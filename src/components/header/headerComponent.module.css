@@ -19,5 +19,13 @@
 }
 
 .menu{
-    margin-top: 30px;
+    margin-top: 40px;
+
 }
+
+.avatar{
+    width:30px;
+    height: 30px;
+    cursor: pointer;
+}
+

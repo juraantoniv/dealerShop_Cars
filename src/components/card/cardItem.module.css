@@ -20,5 +20,6 @@
 .contentContainer{
     display: flex;
     justify-content: center;
-    background-color: rebeccapurple;
+
+    padding: 30px;
 }

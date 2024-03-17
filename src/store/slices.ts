@@ -1,5 +1,11 @@
-import { createSlice, isFulfilled, isPending } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from "@reduxjs/toolkit";
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
+import { AxiosError } from "axios";
 
 import {
   DataCars,
@@ -45,6 +51,9 @@ const slice = createSlice({
     });
     builder.addMatcher(isPending(userThunks.fetchGoods), (state) => {
       state.loading = "loading";
+    });
+    builder.addMatcher(isRejected(userThunks.fetchGoods), (state) => {
+      state.loading = "fulfilled";
     });
     builder.addMatcher(isFulfilled(userThunks.fetchGoods), (state) => {
       state.loading = "fulfilled";
@@ -116,7 +125,8 @@ export const thunkTryCatch = async (
   try {
     return await logic();
   } catch (e) {
-    console.log(e);
-    return rejectWithValue(null);
+    if (e instanceof AxiosError) {
+      return rejectWithValue(e?.response?.data.messages);
+    }
   }
 };

@@ -5,7 +5,13 @@ import React from "react";
 
 import PostUserDialog from "./createAccount";
 
-export const CrateAccountModal = () => {
+type CrateAccountModalType = {
+  callBack: () => void;
+};
+
+export const CrateAccountModal: React.FC<CrateAccountModalType> = ({
+  callBack,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

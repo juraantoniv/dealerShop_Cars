@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { AxiosError } from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -21,6 +22,7 @@ import { findValueByKey } from "../../common/func/findCurrency";
 import { DataCars } from "../../common/types/types";
 import { userThunks } from "../../store/slices";
 import { selectCount, setOffset, useAppDispatch } from "../../store/store";
+import { CarOrder } from "../postCarForm/carOrder";
 import { IconEye } from "../svg/eye";
 import { IconHeart } from "../svg/heart";
 import s from "./cardItem.module.css";
@@ -45,103 +47,92 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
           }),
         );
       })
-      .catch((er) => {
+      .catch((e) => {
         dispatch(
           userThunks.fetchGoods({
             limit: itemPage.toString(),
             offset: skip.toString(),
           }),
         );
-        toast.error(`${er}`);
-        console.log(er);
+        console.log(e);
+        toast.error(`${e}`);
       });
   };
 
   const cur = currencyType ? currencyType : "UAH";
 
   return (
-    <Grid
-      container
-      className={s.contentContainer}
-      columns={{ xs: 2, md: 2 }}
-      gap={3}
-    >
+    <Grid container spacing={1} className={s.contentContainer} gap={3}>
       {items?.map((el) => (
-        <Card sx={{ width: "15% ", height: "350px" }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="100px"
-              image={el.image}
-              alt="green iguana"
-            />
-            <CardContent>
-              <Box className={s.boxCurrency}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {el.brand}
-                </Typography>
-                <Typography variant={"caption"} fontSize={"large"}>
-                  {findValueByKey(
-                    el.currency,
-                    currencyType ? currencyType : "UAH",
-                  )}
-                  <Typography fontStyle={"inherit"} variant={"button"}>
-                    {cur === "EUR" ? (
-                      <EuroIcon />
-                    ) : cur === "USD" ? (
-                      <AttachMoneyIcon />
-                    ) : (
-                      "UAH"
-                    )}
+        <Grid xs={2} sx={{ minHeight: "350px" }}>
+          <Card>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="30%"
+                image={el.image}
+                alt="green iguana"
+              />
+              <CardContent>
+                <Box className={s.boxCurrency}>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {el.brand}
                   </Typography>
+                  <Typography variant={"caption"} fontSize={"large"}>
+                    {findValueByKey(
+                      el.currency,
+                      currencyType ? currencyType : "UAH",
+                    )}
+                    <Typography fontStyle={"inherit"} variant={"button"}>
+                      {cur === "EUR" ? (
+                        <EuroIcon />
+                      ) : cur === "USD" ? (
+                        <AttachMoneyIcon />
+                      ) : (
+                        "UAH"
+                      )}
+                    </Typography>
+                  </Typography>
+                </Box>
+                <Typography
+                  fontFamily={"cursive"}
+                  gutterBottom
+                  variant="h6"
+                  component="span"
+                >
+                  {el.model}
                 </Typography>
-              </Box>
-              <Typography
-                fontFamily={"cursive"}
-                gutterBottom
-                variant="h6"
-                component="span"
+                <Typography variant="body2" color="text.secondary">
+                  {el.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions className={s.cardActions}>
+              <Button
+                size="medium"
+                color="primary"
+                onClick={() => likeCar(el.id)}
               >
-                {el.model}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {el.description}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions className={s.cardActions}>
-            <Button
-              size="medium"
-              color="primary"
-              onClick={() => likeCar(el.id)}
-            >
-              <Badge
-                color={"success"}
-                badgeContent={el.likes?.length ? el.likes?.length : 0}
-              >
-                <IconHeart />
-              </Badge>
-            </Button>
-            <Button size="medium" color="primary">
-              <Badge
-                color={"success"}
-                badgeContent={el.views?.length ? el.views?.length : 0}
-              >
-                <IconEye />
-              </Badge>
-            </Button>
-          </CardActions>
-          <Button
-            sx={{ margin: "1em" }}
-            color="primary"
-            aria-label="add to shopping cart"
-            startIcon={<AddShoppingCartIcon />}
-            variant={"contained"}
-          >
-            ORDER
-          </Button>
-          <ToastContainer />
-        </Card>
+                <Badge
+                  color={"success"}
+                  badgeContent={el.likes?.length ? el.likes?.length : 0}
+                >
+                  <IconHeart />
+                </Badge>
+              </Button>
+              <Button size="medium" color="primary">
+                <Badge
+                  color={"success"}
+                  badgeContent={el.views?.length ? el.views?.length : 0}
+                >
+                  <IconEye />
+                </Badge>
+              </Button>
+            </CardActions>
+            <CarOrder id={el.id} />
+            <ToastContainer />
+          </Card>
+        </Grid>
       ))}
     </Grid>
   );

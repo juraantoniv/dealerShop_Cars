@@ -136,9 +136,9 @@ export default function SearchAppBar() {
             {data ? <PostCarDialog /> : null}
             {data ? (
               <Avatar
-                alt="Remy Sharp"
+                className={s.avatar}
+                alt="Avatar"
                 src={user.avatar}
-                sx={{ width: 24, height: 24 }}
                 onClick={handleClick}
               />
             ) : null}
@@ -160,7 +160,7 @@ export default function SearchAppBar() {
           horizontal: "left",
         }}
       >
-        <CrateAccountModal />
+        <CrateAccountModal callBack={handleClose} />
         <MyAccountModal />
       </Menu>
     </Box>

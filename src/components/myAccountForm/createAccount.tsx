@@ -6,8 +6,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
+import { authService } from "../../services/auth.service";
 import { useAppDispatch } from "../../store/store";
 import s from "./createAccount.module.css";
 
@@ -33,7 +35,7 @@ const Schema = z
     return data;
   });
 
-export type FormType = z.infer<typeof Schema>;
+export type FormTypeCreateUser = z.infer<typeof Schema>;
 
 export default function PostUserDialog() {
   const {
@@ -41,7 +43,7 @@ export default function PostUserDialog() {
     register,
     // control,
     formState: { errors },
-  } = useForm<FormType>({
+  } = useForm<FormTypeCreateUser>({
     resolver: zodResolver(Schema),
   });
   const [open, setOpen] = React.useState(false);
@@ -54,10 +56,16 @@ export default function PostUserDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  const onSubmit = (data: FormType) => {
-    // formData.append("questionImg", data);
-
-    handleClose();
+  const onSubmit = async (data: FormTypeCreateUser) => {
+    console.log(data);
+    try {
+      await authService.createUser({ ...data, file: data.file[0] });
+      handleClose();
+      toast.info("User created");
+    } catch (e) {
+      toast.error("Something wrong happened");
+      console.log(e);
+    }
   };
 
   return (

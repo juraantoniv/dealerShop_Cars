@@ -33,4 +33,5 @@ export const carsApiService = {
         },
       },
     ),
+  orderCar: (id: string) => instance.post<void>(`cars/buy/${id}`),
 };

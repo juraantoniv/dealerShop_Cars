@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as Tabs from "@radix-ui/react-tabs";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { z } from "zod";
 
 import {
@@ -52,7 +52,8 @@ export const LoginFrom = () => {
         });
       })
       .catch((e) => {
-        toast.warn(`${e.response?.data}`);
+        console.log(e.response.data.messages);
+        toast.error(`${e.response?.data.messages}`);
       });
   };
 
@@ -91,6 +92,7 @@ export const LoginFrom = () => {
               <input
                 {...register("password")}
                 className="Input"
+                type={"password"}
                 id="username"
                 defaultValue="123456"
               />
@@ -140,6 +142,7 @@ export const LoginFrom = () => {
             <button className="Button green">Change password</button>
           </div>
         </Tabs.Content>
+        <ToastContainer />
       </Tabs.Root>
     </>
   );
