@@ -11,6 +11,7 @@ import {
   // setLocalAccessToken,
   // setLocalRefreshToken,
 } from "../../common/localStorage/local.storege";
+import { userActions } from "../../store/slices";
 import { authService } from "../auth.service";
 
 const base_url = "http://localhost:3005";
@@ -43,8 +44,6 @@ instance.interceptors.response.use(
 
     if (error.response?.status === 401 && refresh && !isRefreshing) {
       isRefreshing = true;
-
-      console.log("call");
 
       try {
         const tokens = await authService.refresh(refresh);

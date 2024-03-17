@@ -1,6 +1,7 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EuroIcon from "@mui/icons-material/Euro";
+import InfoIcon from "@mui/icons-material/Info";
 import {
   Badge,
   Button,
@@ -16,11 +17,12 @@ import Typography from "@mui/material/Typography";
 import { AxiosError } from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import { findValueByKey } from "../../common/func/findCurrency";
 import { DataCars } from "../../common/types/types";
-import { userThunks } from "../../store/slices";
+import { userActions, userThunks } from "../../store/slices";
 import { selectCount, setOffset, useAppDispatch } from "../../store/store";
 import { CarOrder } from "../postCarForm/carOrder";
 import { IconEye } from "../svg/eye";
@@ -36,6 +38,7 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   const dispatch = useAppDispatch();
   const itemPage = useSelector(selectCount);
   const skip = useSelector(setOffset);
+  const navigate = useNavigate();
   const likeCar = (id: string) => {
     dispatch(userThunks.likeCar(id))
       .unwrap()
@@ -59,17 +62,22 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
       });
   };
 
+  const viewsHandler = (id: string) => {
+    dispatch(userActions.setCarId(id));
+    navigate("carInfo");
+  };
+
   const cur = currencyType ? currencyType : "UAH";
 
   return (
     <Grid container spacing={1} className={s.contentContainer} gap={3}>
       {items?.map((el) => (
-        <Grid xs={2} sx={{ minHeight: "350px" }}>
+        <Grid xs={2} sx={{ minHeight: "200px" }}>
           <Card>
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="30%"
+                height="150px"
                 image={el.image}
                 alt="green iguana"
               />
@@ -130,6 +138,13 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
               </Button>
             </CardActions>
             <CarOrder id={el.id} />
+            <Button
+              variant={"contained"}
+              startIcon={<InfoIcon />}
+              onClick={() => viewsHandler(el.id)}
+            >
+              Info
+            </Button>
           </Card>
         </Grid>
       ))}

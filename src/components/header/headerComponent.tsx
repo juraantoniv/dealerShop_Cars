@@ -1,5 +1,6 @@
+import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
-import { Avatar, Menu } from "@mui/material";
+import { Avatar, Button, Menu } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
@@ -9,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { KeyboardEvent, useState } from "react";
 import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
@@ -17,8 +18,6 @@ import { RecoveryPasswordDiag } from "../forgotPassword/RecoveryPasswordDiag";
 import { CrateAccountModal } from "../myAccountForm/crateAccountModal";
 import { MyAccountModal } from "../myAccountForm/myAccountModal";
 import PostCarDialog from "../postCarForm/postCar";
-// import { LoginFrom } from "../loginComponent/loginComponent";
-// import LoginDiag from "../myAccountForm/postCar";
 import { LoginDiag } from "../radixComponents/alertDiag/LoginDiag";
 import { LogOut } from "../radixComponents/logOut/logOut";
 import s from "./headerComponent.module.css";
@@ -73,12 +72,12 @@ export default function SearchAppBar() {
   const open = Boolean(anchorEl);
   const dispatch = useAppDispatch();
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
   const search = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     setTitle(event.currentTarget.value);
   };
-  console.log(data);
   const addItemHandler = () => {
     if (title.trim() !== "") {
       dispatch(userThunks.fetchGoods({ search: title }));
@@ -98,6 +97,10 @@ export default function SearchAppBar() {
     }
   };
 
+  const toHomePage = () => {
+    navigate("/");
+  };
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -108,15 +111,15 @@ export default function SearchAppBar() {
     <Box className={s.container}>
       <AppBar position="static">
         <Toolbar className={s.tollBar}>
+          <Button
+            onClick={toHomePage}
+            size={"small"}
+            sx={{ cursor: "pointer", color: "white" }}
+            startIcon={<HomeIcon />}
+          >
+            Home
+          </Button>
           <Box className={s.leftBoxToll}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ width: "20%" }}
-            >
-              Cars
-            </Typography>
             {data ? (
               <Search>
                 <SearchIconWrapper>
@@ -133,7 +136,6 @@ export default function SearchAppBar() {
               </Search>
             ) : null}
           </Box>
-
           <Box className={s.rightBoxToll}>
             {data ? <PostCarDialog /> : null}
             {data ? (

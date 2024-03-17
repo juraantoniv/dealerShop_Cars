@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { CarViews } from "../components/currentCar/car";
 import RecoveryPassword from "../components/forgotPassword/recoveryPassword";
 import { RecoveryPasswordAfterEmail } from "../components/forgotPassword/recoveryPasswordAfterEmail";
 import { ChangePassword } from "../components/loginComponent/ChangePassword";
@@ -28,6 +29,10 @@ const privateRoutes: RouteObject[] = [
   {
     path: "forgotWithToken/:token",
     element: <RecoveryPasswordAfterEmail />,
+  },
+  {
+    path: "carInfo",
+    element: <CarViews />,
   },
 ];
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { GoodsType, ParamsType } from "../common/types/types";
+import { DataCars, GoodsType, ParamsType } from "../common/types/types";
 import { FormType } from "../components/postCarForm/postCar";
 import { instance } from "./interceptors/interceptors";
 
@@ -15,6 +15,7 @@ export const carsApiService = {
         ORDER: params?.ORDER,
       },
     }),
+  getById: (id: string) => instance.get<DataCars>(`/cars/${id}`),
   likeCar: (id: string) => instance.post<void>(`cars/like/${id}`),
   postCar: (data: FormType) =>
     instance.post<GoodsType>(

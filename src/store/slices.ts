@@ -26,6 +26,7 @@ const initialState = {
   offset: 0,
   count: 5,
   loading: "",
+  carId: "",
 };
 
 const slice = createSlice({
@@ -43,6 +44,9 @@ const slice = createSlice({
     },
     logOff: (state, action) => {
       state.data = action.payload;
+    },
+    setCarId: (state, action) => {
+      state.carId = action.payload;
     },
   },
   extraReducers: (builder) => {

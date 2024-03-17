@@ -4,6 +4,7 @@
     align-items: center;
     height: 6vh;
     width: 60%;
+    gap: 15px;
 }
 
 .icon{
