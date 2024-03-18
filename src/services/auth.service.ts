@@ -1,9 +1,7 @@
-import { z } from "zod";
-
 import { ITokensForRefresh, ITokensPair } from "../common/types/types";
-import { FormTypeForChangePassword } from "../components/loginComponent/ChangePassword";
-import { FormType } from "../components/loginComponent/LoginComponentNew";
-import { FormTypeCreateUserNew } from "../components/myAccountForm/CreateAccountNew";
+import { FormTypeForChangePassword } from "../components/loginComponent/changePassword";
+import { FormType } from "../components/loginComponent/loginComponentNew";
+import { FormTypeCreateUserNew } from "../components/myAccountForm/createAccountNew";
 import { FormTypeForUpdate } from "../components/myAccountForm/myAccount";
 import { instance } from "./interceptors/interceptors";
 

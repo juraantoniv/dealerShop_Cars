@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { KeyboardEvent, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,11 +13,11 @@ import { useNavigate } from "react-router-dom";
 
 import { userThunks } from "../../store/slices";
 import { selectCars, selectUser, useAppDispatch } from "../../store/store";
-import { RecoveryPasswordDiag } from "../forgotPassword/RecoveryPasswordDiag";
+import { RecoveryPasswordDiag } from "../forgotPassword/recoveryPasswordDiag";
 import { CrateAccountModal } from "../myAccountForm/crateAccountModal";
 import { MyAccountModal } from "../myAccountForm/myAccountModal";
 import PostCarDialog from "../postCarForm/postCar";
-import { LoginDiag } from "../radixComponents/alertDiag/LoginDiag";
+import { LoginDiag } from "../radixComponents/alertDiag/loginDiag";
 import { LogOut } from "../radixComponents/logOut/logOut";
 import s from "./headerComponent.module.css";
 

@@ -10,15 +10,15 @@ import s from "./iconsSocial.module.css";
 export const IconsSocial = () => {
   return (
     <div className={s.icons}>
-      <IconInstagram />
+      <IconInstagram className={s.icon} />
 
-      <IconGithub />
+      <IconGithub className={s.icon} />
 
-      <IconLinkedinCircled />
+      <IconLinkedinCircled className={s.icon} />
 
-      <IconFacebookCircled />
+      <IconFacebookCircled className={s.icon} />
 
-      <IconTelegram />
+      <IconTelegram className={s.icon} />
     </div>
   );
 };

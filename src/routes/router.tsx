@@ -8,8 +8,7 @@ import {
 import { CarViews } from "../components/currentCar/car";
 import RecoveryPassword from "../components/forgotPassword/recoveryPassword";
 import { RecoveryPasswordAfterEmail } from "../components/forgotPassword/recoveryPasswordAfterEmail";
-import { ChangePassword } from "../components/loginComponent/ChangePassword";
-import { SignUp } from "../components/myAccountForm/CreateAccountNew";
+import { SignUp } from "../components/myAccountForm/createAccountNew";
 import { CarList } from "../features/cars/carsList";
 import { MainLayout } from "../layouts/mainLayout";
 

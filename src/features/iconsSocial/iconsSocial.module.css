@@ -8,13 +8,13 @@
 }
 
 .icon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2vw;
     cursor: pointer;
 }
 
-svg:hover{
-    color: red;
+.iconSvg{
+    cursor: pointer;
+}
+
+.icon:hover{
+    color: darkblue;
 }

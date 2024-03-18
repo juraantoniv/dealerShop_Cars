@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { DataCars, GoodsType, ParamsType } from "../common/types/types";
 import { FormType } from "../components/postCarForm/postCar";
 import { instance } from "./interceptors/interceptors";

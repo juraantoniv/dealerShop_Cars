@@ -2,6 +2,7 @@ import "./recoveryPassword.module.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -40,9 +41,7 @@ const RecoveryPassword = () => {
   return (
     <div className={s.TabsRoot}>
       <div className={s.TabsContent}>
-        <p className="Text">
-          Make changes to your account here. Click save when you're done.
-        </p>
+        <p className="Text">Recovery your password here</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="name">
@@ -57,7 +56,7 @@ const RecoveryPassword = () => {
             />
             {errors.email?.message && <span>{errors?.email?.message}</span>}
           </fieldset>
-          <button className="Button green">Recovery</button>
+          <Button variant={"contained"}>Recovery</Button>
         </form>
       </div>
     </div>

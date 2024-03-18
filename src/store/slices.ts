@@ -62,16 +62,6 @@ const slice = createSlice({
     builder.addMatcher(isFulfilled(userThunks.fetchGoods), (state) => {
       state.loading = "fulfilled";
     });
-
-    // .addCase(deleteGood.fulfilled, (state, action) => {
-    //   state.id = action.payload;
-    // })
-    // .addCase(returnEmpty.fulfilled, (state, action) => {
-    //   state.data = action.payload as Goods;
-    // })
-    // .addCase(fetchSoldGoods.fulfilled, (state, action) => {
-    //   state.buyItems = action.payload.data;
-    // });
   },
 });
 

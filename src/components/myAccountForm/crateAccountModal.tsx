@@ -3,7 +3,7 @@ import { ListItemIcon, MenuItem, Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 
-import { SignUp } from "./CreateAccountNew";
+import { SignUp } from "./createAccountNew";
 
 type CrateAccountModalType = {
   callBack: () => void;

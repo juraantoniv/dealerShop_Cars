@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { SignIn } from "../../loginComponent/LoginComponentNew";
+import { SignIn } from "../../loginComponent/loginComponentNew";
 
 export const LoginDiag = () => {
   const navigate = useNavigate();

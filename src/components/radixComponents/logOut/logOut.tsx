@@ -6,7 +6,7 @@ import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import React from "react";
 
 import { authService } from "../../../services/auth.service";
-import { userActions, userThunks } from "../../../store/slices";
+import { userActions } from "../../../store/slices";
 import { useAppDispatch } from "../../../store/store";
 
 export const LogOut = () => {

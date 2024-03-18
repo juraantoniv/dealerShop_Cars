@@ -1,4 +1,3 @@
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EuroIcon from "@mui/icons-material/Euro";
 import InfoIcon from "@mui/icons-material/Info";
@@ -14,11 +13,10 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { AxiosError } from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { findValueByKey } from "../../common/func/findCurrency";
 import { DataCars } from "../../common/types/types";
@@ -72,7 +70,7 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   return (
     <Grid container spacing={1} className={s.contentContainer} gap={3}>
       {items?.map((el) => (
-        <Grid xs={2} sx={{ minHeight: "200px" }}>
+        <Grid xs={2} sx={{ minHeight: "230px" }}>
           <Card>
             <CardActionArea>
               <CardMedia

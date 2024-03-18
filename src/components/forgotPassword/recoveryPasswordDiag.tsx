@@ -3,11 +3,9 @@ import "./recoveryPassword.module.css";
 import PasswordIcon from "@mui/icons-material/Password";
 import { Link, ListItemIcon, MenuItem, Modal } from "@mui/material";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import React from "react";
 
-import { ChangePassword } from "../loginComponent/ChangePassword";
-import RecoveryPassword from "./recoveryPassword";
+import { ChangePassword } from "../loginComponent/changePassword";
 
 export const RecoveryPasswordDiag = () => {
   const [open, setOpen] = React.useState(false);
