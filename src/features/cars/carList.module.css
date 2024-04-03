@@ -2,12 +2,12 @@
     display: flex;
     width: 100%;
     height: 60%;
+    justify-content: center;
 }
 
 .sideContainer{
     width: 15%;
-    border: 1px solid;
-    border-radius: 10px;
+
 }
 
 .contentContainer{
@@ -16,7 +16,6 @@
     flex-direction: column;
     padding: 20px;
     width: 80%;
-    border: 1px solid;
     border-radius: 10px;
     margin-left: 10px;
 }
@@ -27,3 +26,25 @@
 
 }
 
+@media screen and (max-width: 768px) {
+    .sideContainer{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin: 10px;
+        padding: 10px;
+
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .contentContainer{
+        width: 100%;
+        margin: 5px;
+    }
+
+}

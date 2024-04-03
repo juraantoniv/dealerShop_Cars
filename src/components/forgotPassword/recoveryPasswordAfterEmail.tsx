@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 
 import { authService } from "../../services/auth.service";
-import s from "../loginComponent/ChangePassword.module.css";
+import s from "../loginComponent/changePassword.module.css";
 
 const Schema = z.object({
   new_password: z.string().min(1).max(10),

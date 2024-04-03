@@ -23,7 +23,7 @@ export const LoginDiag = () => {
     setOpen(false);
   };
   return (
-    <div>
+    <Box>
       <Button
         onClick={handleClickOpen}
         startIcon={<LoginIcon />}
@@ -41,6 +41,6 @@ export const LoginDiag = () => {
           <SignIn callback={handleClose} />
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };

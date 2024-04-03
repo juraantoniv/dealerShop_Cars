@@ -22,11 +22,13 @@ const initialState = {
   data: {} as GoodsType,
   user: {} as UserInfoType,
   id: "",
-  buyItems: [] as GoodsType[] | [],
   offset: 0,
   count: 5,
   loading: "",
   carId: "",
+  darkMode: false,
+  sort: true,
+  lang: "eng",
 };
 
 const slice = createSlice({
@@ -47,6 +49,15 @@ const slice = createSlice({
     },
     setCarId: (state, action) => {
       state.carId = action.payload;
+    },
+    setTheme: (state, action) => {
+      state.darkMode = action.payload;
+    },
+    setSort: (state, action) => {
+      state.sort = action.payload;
+    },
+    setLang: (state, action) => {
+      state.lang = action.payload;
     },
   },
   extraReducers: (builder) => {

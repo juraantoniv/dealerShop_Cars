@@ -1,10 +1,11 @@
+import { Box } from "@mui/material";
 import React, { useState } from "react";
 
 import IconPauseCircle from "../svg/pause";
 import { IconPlayCircle } from "../svg/play";
 
 type Buttons = {
-  callback: () => void;
+  callback: (el: boolean) => void;
 };
 
 const TopButtons = React.memo(function (props: Buttons) {
@@ -12,13 +13,13 @@ const TopButtons = React.memo(function (props: Buttons) {
 
   const onPlayHandler = () => {
     setPlay(!play);
-    props.callback();
+    props.callback(play);
   };
 
   return (
-    <div onClick={onPlayHandler}>
+    <Box onClick={onPlayHandler}>
       {play ? <IconPauseCircle /> : <IconPlayCircle />}
-    </div>
+    </Box>
   );
 });
 

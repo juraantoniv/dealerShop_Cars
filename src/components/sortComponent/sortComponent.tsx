@@ -1,26 +1,38 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
+import { userActions, userThunks } from "../../store/slices";
+import {
+  selectCars,
+  selectCount,
+  setOffset,
+  sortDirection,
+  useAppDispatch,
+} from "../../store/store";
 import s from "./sortComponent.module.css";
 
-type SortComponentType = {
-  sortDirectionCallBack: (direc: boolean) => void;
-};
+export const SortComponent = () => {
+  const direction = useSelector(sortDirection);
+  const dispatch = useAppDispatch();
+  const cars = useSelector(selectCars);
+  const skip = useSelector(setOffset);
 
-export const SortComponent: React.FC<SortComponentType> = ({
-  sortDirectionCallBack,
-}) => {
-  const [sort, serSort] = useState<boolean>(false);
-
-  const sortDirection = () => {
-    serSort(!sort);
-    sortDirectionCallBack(sort);
+  const sortDirectionItem = () => {
+    dispatch(userActions.setSort(!direction));
+    dispatch(
+      userThunks.fetchGoods({
+        limit: String(cars?.limit),
+        offset: skip.toString(),
+        ORDER: direction ? "ASC" : "DESC",
+      }),
+    );
   };
   return (
-    <div className={s.sortContainer} onClick={sortDirection}>
+    <div className={s.sortContainer} onClick={sortDirectionItem}>
       Sort
-      {sort ? (
+      {direction ? (
         <ArrowDropDownIcon fontSize={"large"} />
       ) : (
         <ArrowDropUpIcon fontSize={"large"} />

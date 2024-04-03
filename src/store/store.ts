@@ -44,3 +44,7 @@ export const selectCount = (state: AppRootStateType) => state.count;
 export const setOffset = (state: AppRootStateType) => state.offset;
 export const loadingStatus = (state: AppRootStateType) => state.loading;
 export const carId = (state: AppRootStateType) => state.carId;
+
+export const themeValue = (state: AppRootStateType) => state.darkMode;
+export const sortDirection = (state: AppRootStateType) => state.sort;
+export const langValue = (state: AppRootStateType) => state.lang;

@@ -1,8 +1,11 @@
-import { Pagination } from "@mui/material";
+import { Card, Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Slider from "react-slick";
 
+import { findValueByKey } from "../../common/func/findCurrency";
+import { DataCars } from "../../common/types/types";
 import { CardItem } from "../../components/card/cardItem";
 import { SelectComponent } from "../../components/selectComponent/selectComponent";
 import { SelectItemsCount } from "../../components/selectCountItems/selectItemsCount";
@@ -12,9 +15,14 @@ import {
   selectCars,
   selectCount,
   setOffset,
+  sortDirection,
   useAppDispatch,
 } from "../../store/store";
 import s from "./carList.module.css";
+
+function valuetext(value: number) {
+  return `${value}°C`;
+}
 
 export const CarList = () => {
   const dispatch = useAppDispatch();
@@ -23,32 +31,20 @@ export const CarList = () => {
   const skip = useSelector(setOffset);
   const amountPages = Math.ceil(cars?.total / cars?.limit);
   const itemPage = useSelector(selectCount);
-  const [sortDirection, setSort] = useState<boolean>(false);
+  const direction = useSelector(sortDirection);
+  // const [sortDirection, setSort] = useState<boolean>(false);
   const [currency, setCurrency] = React.useState("");
   const { data } = useSelector(selectCars);
 
-  const sort = (direction: boolean) => {
-    setSort(direction);
-    dispatch(
-      userThunks.fetchGoods({
-        limit: String(cars?.limit),
-        offset: skip.toString(),
-        ORDER: sortDirection ? "ASC" : "DESC",
-      }),
-    );
-  };
+  // const filteredCars: Array<DataCars> = data.filter(
+  //   (el) =>
+  //     findValueByKey(el.currency, "UAH")! > min &&
+  //     findValueByKey(el.currency, "UAH")! < max,
+  // );
+
   const currencyType = (type: string) => {
     setCurrency(type);
   };
-
-  useEffect(() => {
-    dispatch(
-      userThunks.fetchGoods({
-        limit: itemPage.toString(),
-        offset: skip.toString(),
-      }),
-    );
-  }, [dispatch]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     const items = itemPage * (value - 1);
@@ -57,6 +53,7 @@ export const CarList = () => {
       userThunks.fetchGoods({
         limit: String(cars?.limit),
         offset: items.toString(),
+        ORDER: !direction ? "ASC" : "DESC",
       }),
     );
   };
@@ -64,16 +61,16 @@ export const CarList = () => {
   return (
     <>
       {data ? (
-        <div className={s.container}>
-          <div className={s.sideContainer}>
-            <div className={s.sortContainer}>
+        <Box className={s.container}>
+          <Card className={s.sideContainer} variant={"outlined"}>
+            <Box className={s.sortContainer}>
               <SelectItemsCount />
-              <SortComponent sortDirectionCallBack={sort} />
-            </div>
+              <SortComponent />
+            </Box>
             <SelectComponent setCurrencyType={currencyType} />
-          </div>
-          <Box className={s.contentContainer}>
-            <CardItem items={cars.data} currencyType={currency} />
+          </Card>
+          <Card className={s.contentContainer} variant={"outlined"}>
+            <CardItem items={cars?.data} currencyType={currency} />
             <Pagination
               sx={{ marginTop: "30px" }}
               count={amountPages}
@@ -82,8 +79,8 @@ export const CarList = () => {
               variant="outlined"
               shape="rounded"
             />
-          </Box>
-        </div>
+          </Card>
+        </Box>
       ) : null}
     </>
   );

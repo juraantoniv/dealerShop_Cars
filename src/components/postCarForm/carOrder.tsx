@@ -1,6 +1,7 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { AxiosError } from "axios";
 import React from "react";
@@ -28,14 +29,12 @@ export const CarOrder: React.FC<CarOrderType> = ({ id }) => {
     <AlertDialog.Root>
       <AlertDialog.Trigger asChild>
         <Button
-          sx={{ margin: "1em" }}
+          size={"small"}
           color="primary"
-          aria-label="add to shopping cart"
           startIcon={<AddShoppingCartIcon />}
           variant={"contained"}
-        >
-          ORDER
-        </Button>
+          sx={{ width: "50%", marginRight: "10px" }}
+        ></Button>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="AlertDialogOverlay" />

@@ -1,0 +1,21 @@
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+    height: 200px;
+}
+
+.box{
+    width: 80%;
+    height: 300px;
+    margin-left: 10%;
+
+}
+
+@media screen and (max-width: 768px) {
+    .box{
+        display: none;
+    }
+}

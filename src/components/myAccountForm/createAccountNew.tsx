@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Card } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -21,7 +22,7 @@ import { z } from "zod";
 
 import { authService } from "../../services/auth.service";
 import { useAppDispatch } from "../../store/store";
-import s from "./CreateAcctountNew.module.css";
+import s from "./createAcctountNew.module.css";
 
 function Copyright(props: any) {
   return (
@@ -65,7 +66,11 @@ const Schema = z
 
 export type FormTypeCreateUserNew = z.infer<typeof Schema>;
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    mode: true ? "dark" : "light",
+  },
+});
 
 export const SignUp = () => {
   const {
@@ -96,116 +101,113 @@ export const SignUp = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box className={s.container}>
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Button
-                startIcon={<CloudUploadIcon />}
-                variant="contained"
-                component="label"
-                style={{ margin: "1em" }}
-              >
-                Upload PHOTO
-                <input {...register("file")} name={"file"} type="file" hidden />
-              </Button>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  {...register("name")}
-                  autoComplete="given-name"
-                  name="name"
-                  required
-                  fullWidth
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  {...register("age", { valueAsNumber: true })}
-                  name={"age"}
-                  size={"small"}
-                  helperText="Please enter age"
-                  id="demo-helper-text-aligned"
-                  label="age"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  {...register("email")}
-                  required
-                  fullWidth
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  {...register("city")}
-                  required
-                  fullWidth
-                  id="email"
-                  label="city"
-                  name="city"
-                  autoComplete="city"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  {...register("password")}
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  {...register("confirmPassword")}
-                  fullWidth
-                  name="confirmPassword"
-                  label="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
+    <Container component="main" maxWidth="xs">
+      <Card className={s.container} variant={"outlined"}>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ mt: 3 }}
+        >
+          <Grid container spacing={2}>
             <Button
-              type="submit"
-              fullWidth
+              startIcon={<CloudUploadIcon />}
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              component="label"
+              style={{ margin: "1em" }}
             >
-              Sign Up
+              Upload PHOTO
+              <input {...register("file")} name={"file"} type="file" hidden />
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                {...register("name")}
+                autoComplete="given-name"
+                name="name"
+                required
+                fullWidth
+                label="First Name"
+                autoFocus
+              />
             </Grid>
-          </Box>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                {...register("age", { valueAsNumber: true })}
+                name={"age"}
+                size={"small"}
+                helperText="Please enter age"
+                id="demo-helper-text-aligned"
+                label="age"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("email")}
+                required
+                fullWidth
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("city")}
+                required
+                fullWidth
+                id="email"
+                label="city"
+                name="city"
+                autoComplete="city"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("password")}
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                {...register("confirmPassword")}
+                fullWidth
+                name="confirmPassword"
+                label="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
+      </Card>
+      <Copyright sx={{ mt: 5 }} />
+    </Container>
   );
 };

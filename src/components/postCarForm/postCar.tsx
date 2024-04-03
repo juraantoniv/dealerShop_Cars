@@ -11,6 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -89,7 +90,7 @@ export default function PostCarDialog() {
         variant="contained"
         onClick={handleClickOpen}
       >
-        ADD CAR
+        <Trans>sellCar</Trans>
       </Button>
       <Dialog
         open={open}

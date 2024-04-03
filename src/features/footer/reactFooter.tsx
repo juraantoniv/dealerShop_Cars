@@ -16,7 +16,7 @@ import s from "./reactFoter.module.css";
 export const FooterPage = () => {
   return (
     <MDBFooter className={s.section} color="white" bgColor="dark">
-      <MDBContainer className={s.section}>
+      <MDBContainer className={s.sectionInner}>
         <IconsSocial />
         <div className={s.input}>
           <form action="" className={s.input1}>
@@ -46,12 +46,7 @@ export const FooterPage = () => {
         </div>
 
         <section className="mb-4">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            distinctio earum repellat quaerat voluptatibus placeat nam, commodi
-            optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-            sequi voluptate quas.
-          </p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </section>
       </MDBContainer>
 

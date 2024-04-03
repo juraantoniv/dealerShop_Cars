@@ -10,6 +10,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Stack,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -37,6 +38,7 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   const itemPage = useSelector(selectCount);
   const skip = useSelector(setOffset);
   const navigate = useNavigate();
+
   const likeCar = (id: string) => {
     dispatch(userThunks.likeCar(id))
       .unwrap()
@@ -70,14 +72,15 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
   return (
     <Grid container spacing={1} className={s.contentContainer} gap={3}>
       {items?.map((el) => (
-        <Grid xs={2} sx={{ minHeight: "230px" }}>
-          <Card>
+        <Grid item xs={12} sm={4} md={3} lg={2}>
+          <Card variant={"outlined"} sx={{ minHeight: "230px" }}>
             <CardActionArea>
               <CardMedia
                 component="img"
                 height="150px"
                 image={el.image}
-                alt="green iguana"
+                alt="car"
+                sx={{ borderRadius: "10px" }}
               />
               <CardContent>
                 <Box className={s.boxCurrency}>
@@ -114,35 +117,39 @@ export const CardItem: React.FC<cardContent> = ({ items, currencyType }) => {
               </CardContent>
             </CardActionArea>
             <CardActions className={s.cardActions}>
-              <Button
-                size="medium"
-                color="primary"
-                onClick={() => likeCar(el.id)}
-              >
-                <Badge
-                  color={"success"}
-                  badgeContent={el.likes?.length ? el.likes?.length : 0}
+              <Stack direction={"row"}>
+                <Button
+                  size="medium"
+                  color="primary"
+                  onClick={() => likeCar(el.id)}
                 >
-                  <IconHeart />
-                </Badge>
-              </Button>
-              <Button size="medium" color="primary">
-                <Badge
-                  color={"success"}
-                  badgeContent={el.views?.length ? el.views?.length : 0}
-                >
-                  <IconEye />
-                </Badge>
-              </Button>
+                  <Badge
+                    color={"success"}
+                    badgeContent={el.likes?.length ? el.likes?.length : 0}
+                  >
+                    <IconHeart />
+                  </Badge>
+                </Button>
+                <Button size="small" color="primary">
+                  <Badge
+                    color={"success"}
+                    badgeContent={el.views?.length ? el.views?.length : 0}
+                  >
+                    <IconEye />
+                  </Badge>
+                </Button>
+              </Stack>
+
+              <Stack direction={"row"}>
+                <CarOrder id={el.id} />
+                <Button
+                  variant={"contained"}
+                  startIcon={<InfoIcon />}
+                  onClick={() => viewsHandler(el.id)}
+                  size={"small"}
+                ></Button>
+              </Stack>
             </CardActions>
-            <CarOrder id={el.id} />
-            <Button
-              variant={"contained"}
-              startIcon={<InfoIcon />}
-              onClick={() => viewsHandler(el.id)}
-            >
-              Info
-            </Button>
           </Card>
         </Grid>
       ))}

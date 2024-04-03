@@ -1,0 +1,17 @@
+.car{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    width: 100vw
+}
+
+.carImg{
+    width: 100%;
+}
+
+
+.container{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}

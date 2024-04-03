@@ -7,7 +7,13 @@ import React from "react";
 
 import { ChangePassword } from "../loginComponent/changePassword";
 
-export const RecoveryPasswordDiag = () => {
+type ChangePasswordType = {
+  closeModal: () => void;
+};
+
+export const RecoveryPasswordDiag: React.FC<ChangePasswordType> = ({
+  closeModal,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -16,6 +22,7 @@ export const RecoveryPasswordDiag = () => {
 
   const handleClose = () => {
     setOpen(false);
+    closeModal();
   };
   return (
     <div>
@@ -39,7 +46,7 @@ export const RecoveryPasswordDiag = () => {
             marginTop: "80px",
           }}
         >
-          <ChangePassword />
+          <ChangePassword closeModal={handleClose} />
         </Box>
       </Modal>
     </div>

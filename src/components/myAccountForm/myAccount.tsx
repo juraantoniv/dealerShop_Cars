@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
@@ -61,7 +61,7 @@ export const MyAccount: React.FC<MyType> = ({ close }) => {
 
   return (
     <React.Fragment>
-      <Box className={s.box}>
+      <Card className={s.box} variant={"outlined"}>
         <CloseIcon
           onClick={close}
           sx={{ cursor: "pointer", marginLeft: "90%" }}
@@ -106,7 +106,7 @@ export const MyAccount: React.FC<MyType> = ({ close }) => {
             Save
           </Button>
         </form>
-      </Box>
+      </Card>
     </React.Fragment>
   );
 };

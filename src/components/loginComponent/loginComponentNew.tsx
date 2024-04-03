@@ -2,6 +2,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Card } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -12,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import Draggable, { DraggableCore } from "react-draggable";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,7 +26,7 @@ import {
 import { authService } from "../../services/auth.service";
 import { userActions, userThunks } from "../../store/slices";
 import { useAppDispatch } from "../../store/store";
-import s from "./LoginComponent.module.css";
+import s from "./loginComponent.module.css";
 
 function Copyright(props: any) {
   return (
@@ -36,14 +38,13 @@ function Copyright(props: any) {
     >
       {"Copyright © "}
       <Link to={""}>Your Website</Link> {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
 const Schema = z.object({
   password: z.string().min(1),
-  email: z.string().email({ message: "error" }),
+  email: z.string().email(),
 });
 
 export type FormType = z.infer<typeof Schema>;
@@ -70,8 +71,6 @@ export const SignIn: React.FC<SignType> = ({ callback }) => {
     authService
       .login(data)
       .then((r) => {
-        console.log(r);
-
         setLocalAccessToken(r?.data?.tokens.accessToken);
         setLocalRefreshToken(r?.data?.tokens.refreshToken);
         dispatch(userActions.setCurrenUser(r.data.user));
@@ -94,69 +93,64 @@ export const SignIn: React.FC<SignType> = ({ callback }) => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="small" maxWidth="xs">
+    <Container component="small" maxWidth="xs">
+      <Card className={s.container} variant={"outlined"}>
         <CssBaseline />
-        <Box className={s.container}>
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{ mt: 1 }}
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
+          <TextField
+            {...register("email")}
+            margin="normal"
+            required
+            fullWidth
+            defaultValue={"juraantoniv@gmail.com"}
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            helperText={errors.email?.message}
+            error={!!errors.email?.message}
+          />
+          <TextField
+            {...register("password")}
+            margin="normal"
+            fullWidth
+            helperText={errors.password?.message}
+            error={!!errors.password?.message}
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <TextField
-              {...register("email")}
-              margin="normal"
-              required
-              fullWidth
-              defaultValue={"juraantoniv@gmail.com"}
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              {...register("password")}
-              margin="normal"
-              required
-              fullWidth
-              error={!!errors?.password?.message}
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to={"forgot_password"} onClick={callback}>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to={"create"} onClick={callback}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link to={"forgot_password"} onClick={callback}>
+                Forgot password?
+              </Link>
             </Grid>
-          </Box>
+            <Grid item>
+              <Link to={"create"} onClick={callback}>
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Card>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 };

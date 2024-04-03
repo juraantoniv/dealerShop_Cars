@@ -15,9 +15,11 @@ import { useSelector } from "react-redux";
 import { DataCars } from "../../common/types/types";
 import { carsApiService } from "../../services/cars.service";
 import { carId, selectCars } from "../../store/store";
-import s from "../card/cardItem.module.css";
+import { CaurusellPage } from "../courusellComponent/caulrosellPage";
+import { ReactSlickDemo } from "../courusellComponent/caurusell";
 import { IconEye } from "../svg/eye";
 import { IconHeart } from "../svg/heart";
+import s from "./car.module.css";
 
 export const CarViews = () => {
   const [car, setCar] = useState<DataCars>();
@@ -31,55 +33,58 @@ export const CarViews = () => {
   }, []);
 
   return (
-    <>
+    <Box className={s.container}>
       {data ? (
         <Card>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="250"
-              image={car?.image}
-              alt="green iguana"
-            />
-            <CardContent>
-              <Box className={s.boxCurrency}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {car?.brand}
+          <Card className={s.car}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="350"
+                image={car?.image}
+                alt="car"
+                className={s.carImg}
+              />
+              <CardContent>
+                <Box className={s.boxCurrency}>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {car?.brand}
+                  </Typography>
+                </Box>
+                <Typography
+                  fontFamily={"cursive"}
+                  gutterBottom
+                  variant="h6"
+                  component="span"
+                >
+                  {car?.model}
                 </Typography>
-              </Box>
-              <Typography
-                fontFamily={"cursive"}
-                gutterBottom
-                variant="h6"
-                component="span"
-              >
-                {car?.model}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {car?.description}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions className={s.cardActions}>
-            <Button size="medium" color="primary" disabled>
-              <Badge
-                color={"success"}
-                badgeContent={car?.likes?.length ? car?.likes?.length : 0}
-              >
-                <IconHeart />
-              </Badge>
-            </Button>
-            <Button size="medium" color="primary">
-              <Badge
-                color={"success"}
-                badgeContent={car?.views?.length ? car.views?.length : 0}
-              >
-                <IconEye />
-              </Badge>
-            </Button>
-          </CardActions>
+                <Typography variant="body2" color="text.secondary">
+                  {car?.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions className={s.cardActions}>
+              <Button size="medium" color="primary" disabled>
+                <Badge
+                  color={"success"}
+                  badgeContent={car?.likes?.length ? car?.likes?.length : 0}
+                >
+                  <IconHeart />
+                </Badge>
+              </Button>
+              <Button size="medium" color="primary">
+                <Badge
+                  color={"success"}
+                  badgeContent={car?.views?.length ? car.views?.length : 0}
+                >
+                  <IconEye />
+                </Badge>
+              </Button>
+            </CardActions>
+          </Card>
         </Card>
       ) : null}
-    </>
+    </Box>
   );
 };

@@ -8,20 +8,24 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+
 }
 
 .leftBoxToll{
     display: flex;
-    justify-content: space-around;
-    width: 15%;
+    justify-content: start;
+    width: 40%;
+    gap: 1vw;
+    margin-right: 15vw;
 }
 
 .rightBoxToll{
     display: flex;
+    justify-content: end;
     align-items: center;
-    width: 55%;
     gap: 20px;
-    padding-left: 35%;
+    width: 40%;
 }
 
 .menu{
@@ -34,4 +38,34 @@
     height: 30px;
     cursor: pointer;
 }
+.searchIcons{
+    display: flex;
+   justify-content: start;
+    align-items: center;
+    width: 100%;
+    column-gap: 10px;
+}
 
+.MenuIcon{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .searchIcons {
+      display: none;
+    }
+
+    .MenuIcon {
+        display: flex;
+        width: 50%;
+    }
+    .leftBoxToll{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+    }
+    .rightBoxToll{
+        display: none;
+    }
+}

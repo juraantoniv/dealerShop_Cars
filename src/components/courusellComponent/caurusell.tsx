@@ -1,50 +1,55 @@
-import React, { useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./styless.css";
+
+import { Box, Card, CardMedia } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
 
+import { findValueByKey } from "../../common/func/findCurrency";
 import { selectCars } from "../../store/store";
+import IconPauseCircle from "../svg/pause";
+import { IconPlayCircle } from "../svg/play";
+import s from "./caulrosell.module.css";
 
-// other imports...
-
-type ReactSlickProps = {
-  callback?: () => void;
+type CauruselType = {
+  variant: string;
 };
 
-export const ReactSlickDemo = React.memo((props: ReactSlickProps) => {
+export const ReactSlickDemo = () => {
   const cars = useSelector(selectCars);
-  const [play, setPlay] = useState(true);
-
   const settings = {
-    dots: true,
+    className: "center",
+    centerMode: true,
+    focusOnSelect: true,
     infinite: true,
-    autoplay: play,
-    speed: 2000,
-    autoplaySpeed: 2000,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    pauseOnHover: true,
+    centerPadding: "100px",
+    slidesToShow: 3,
+    speed: 500,
+    autoplay: true,
+    cssEase: "linear",
   };
 
-  // const onChangeHandler = () => {};
-  //
-  // const onPlayHandler = (item: boolean) => {
-  //   setPlay(item);
-  // };
-
   return (
-    <div style={{ width: "70%", height: "150px" }}>
+    <Card className={s.box}>
       <Slider key="slider-on" {...settings}>
-        {cars?.data?.map((user) => (
-          <div key={user?.brand}>
-            <div>{user?.model}</div>
-            <img
-              src={user?.image}
-              style={{ width: "20%" }}
-              alt={user.description}
+        {cars?.data?.map((car) => (
+          <Card>
+            <Typography>{car?.brand}</Typography>
+            <CardMedia
+              sx={{ borderRadius: "10px" }}
+              component="img"
+              height="100"
+              image={car.image}
             />
-          </div>
+            <Typography>{car?.model}</Typography>
+            <Typography fontStyle={"oblique"} fontSize={"large"}>
+              {findValueByKey(car.currency, "UAH")} UAH
+            </Typography>
+          </Card>
         ))}
       </Slider>
-    </div>
+    </Card>
   );
-});
+};
